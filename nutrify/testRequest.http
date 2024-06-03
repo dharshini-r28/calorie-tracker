@@ -1,0 +1,14 @@
+###
+### Calculate Calories
+###
+
+### Request for Calculating Calories
+POST http://localhost:8000/calories HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImthcmFuQGdtYWlsLmNvbSIsImlhdCI6MTcxNzE3NDg1MX0.g_1qmJUQTe37rsUjZGuQ9JRzZPuvrrQjCLp_gOCWtIc
+
+{
+  "userId": "66536ca739530b92768772f5",
+  "date": "2024-05-31",
+  "calories": 1500
+}
