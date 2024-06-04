@@ -14,7 +14,7 @@ const infoModel = require('./models/infoModel');
  const verifyToken = require("./verifyToken")
 
 
-mongoose.connect("mongodb+srv://2dharshini82004:2dharshini82004@cluster0.grwbibo.mongodb.net/nutrify")
+mongoose.connect("")
 .then(()=>{
     console.log("Database connection successfull")
 })
