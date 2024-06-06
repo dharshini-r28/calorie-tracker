@@ -1,5 +1,3 @@
-// Food.jsx
-
 import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { Link } from "react-router-dom";

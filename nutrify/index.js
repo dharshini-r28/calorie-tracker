@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
+const CalorieInfo = require('./models/CalorieInfoModel');
 const cors = require('cors');
 
 const infoModel = require('./models/infoModel');
@@ -233,7 +233,45 @@ app.post('/calories', verifyToken, async (req, res) => {
 });
 
 
-
+app.post('/calinfo', verifyToken, async (req, res) => {
+    const { userId, date, totalCalories, caloriesConsumed, caloriesToGo } = req.body;
+  
+    try {
+      let calorieInfo = await CalorieInfo.findOne({ userId, date });
+      if (calorieInfo) {
+        calorieInfo.totalCalories = totalCalories;
+        calorieInfo.caloriesConsumed = caloriesConsumed;
+        calorieInfo.caloriesToGo = caloriesToGo;
+      } else {
+        calorieInfo = new CalorieInfo({ userId, date, totalCalories, caloriesConsumed, caloriesToGo });
+      }
+  
+      await calorieInfo.save();
+      res.status(200).json({ message: 'Calorie data saved' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'An error occurred' });
+    }
+  });
+  
+  app.get('/calinfo/:userId', verifyToken, async (req, res) => {
+    const { userId } = req.params;
+    const date = new Date().toISOString().split('T')[0];
+  
+    try {
+      const calorieInfo = await CalorieInfo.findOne({ userId, date });
+      if (calorieInfo) {
+        res.status(200).json(calorieInfo);
+      } else {
+        const latestCalorieInfo = await CalorieInfo.findOne({ userId }).sort({ date: -1 });
+        const totalCalories = latestCalorieInfo ? latestCalorieInfo.totalCalories : 0;
+        res.status(200).json({ totalCalories, caloriesConsumed: 0, caloriesToGo: totalCalories });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'An error occurred' });
+    }
+  });
 
 app.listen(8000,()=>{
     console.log("Server is up and running");
