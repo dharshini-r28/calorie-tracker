@@ -1,36 +1,63 @@
-// Track.jsx
-
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import Food from './Food';
 import Header from './Header';
 import Vizual from './Vizual';
 
 const Track = () => {
-  const loggedData = useContext(UserContext);
+  const { loggedUser } = useContext(UserContext);
   const [foodItems, setFoodItems] = useState([]);
   const [food, setFood] = useState(null);
-  const [caloriesConsumed, setCaloriesConsumed] = useState(0); // State for consumed calories
+  const [caloriesConsumed, setCaloriesConsumed] = useState(0);
+  const [isTracking, setIsTracking] = useState(false);
+
+  useEffect(() => {
+    const fetchCalorieData = async () => {
+      try {
+        const response = await fetch(`http://localhost:8000/calinfo/${loggedUser.userid}`, {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${loggedUser.token}`,
+          },
+        });
+
+        const data = await response.json();
+        const currentDate = new Date().toISOString().split('T')[0];
+
+        if (data.date === currentDate) {
+          setCaloriesConsumed(data.caloriesConsumed);
+        } else {
+          setCaloriesConsumed(0);
+        }
+
+        setIsTracking(true);
+      } catch (error) {
+        console.error('Error fetching calorie info:', error);
+      }
+    };
+
+    fetchCalorieData();
+  }, [loggedUser]);
 
   function searchFood(event) {
-    const inputValue = event.target.value.trim(); // Trim white spaces
+    const inputValue = event.target.value.trim();
     if (inputValue.length !== 0) {
       fetch(`http://localhost:8000/foods/${inputValue}`, {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Authorization": `Bearer ${loggedData.loggedUser.token}`
-        }
+          Authorization: `Bearer ${loggedUser.token}`,
+        },
       })
-        .then((response) => response.json())
-        .then((data) => {
+        .then(response => response.json())
+        .then(data => {
           if (data.message === undefined) {
             setFoodItems(data);
-            setFood(null); // Clear selected food when searching
+            setFood(null);
           } else {
             setFoodItems([]);
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     } else {
@@ -38,9 +65,9 @@ const Track = () => {
     }
   }
 
-  // Function to update caloriesConsumed state
   function updateCaloriesConsumed(calories) {
     setCaloriesConsumed(prevCalories => prevCalories + calories);
+    setIsTracking(true);
   }
 
   return (
@@ -56,7 +83,7 @@ const Track = () => {
           />
           {foodItems.length !== 0 ? (
             <div className="search-results">
-              {foodItems.map((item) => (
+              {foodItems.map(item => (
                 <p
                   className="item"
                   onClick={() => {
@@ -75,8 +102,7 @@ const Track = () => {
           <Food food={food} updateCaloriesConsumed={updateCaloriesConsumed} />
         ) : null}
       </section>
-      {/* Pass caloriesConsumed to Vizual component */}
-      <Vizual caloriesConsumed={caloriesConsumed} />
+      {isTracking && <Vizual caloriesConsumed={caloriesConsumed} />}
     </>
   );
 };
