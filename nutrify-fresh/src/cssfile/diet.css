@@ -1,0 +1,13 @@
+.container-diet-container{
+    max-width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 220px;
+}
+
+.item{
+    color: aliceblue;
+    font-size: larger;
+}

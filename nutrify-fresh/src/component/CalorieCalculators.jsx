@@ -2,7 +2,7 @@ import React, { useState, useContext, useRef } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
-
+import '../cssfile/caloriecalculator.css'
 const CalorieCalculator = () => {
   const { loggedUser } = useContext(UserContext);
   const [weight, setWeight] = useState('');
@@ -77,7 +77,8 @@ const CalorieCalculator = () => {
 
   return (
     <div>
-      <h1>Daily Calorie Calculator</h1>
+    <div className='caloriebg'>
+     <h1 >Daily Calorie Calculator</h1>
       <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
         <div>
           <label>Weight (kg): </label>
@@ -126,12 +127,13 @@ const CalorieCalculator = () => {
         <button type="button" onClick={handleClick}>Calculate</button>
         <Link to="/track">Go to tracking</Link>
       </form>
+      </div>
       {calories !== null && (
         <div>
           <h2>Total Daily Calories: {calories.toFixed(2)}</h2>
         </div>
       )}
-    </div>
+      </div>
   );
 };
 

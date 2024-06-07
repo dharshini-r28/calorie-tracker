@@ -3,7 +3,8 @@ import { UserContext } from '../contexts/UserContext';
 import Food from './Food';
 import Header from './Header';
 import Vizual from './Vizual';
-
+import '../cssfile/track.css';
+import { MdContentPasteSearch } from "react-icons/md";
 const Track = () => {
   const { loggedUser } = useContext(UserContext);
   const [foodItems, setFoodItems] = useState([]);
@@ -72,9 +73,10 @@ const Track = () => {
 
   return (
     <>
-      <section className="container track-container">
-        <Header />
+    <div className='view-container'>
+     <Header />
         <div className="search">
+          <div className='search-icon'> <MdContentPasteSearch /></div>
           <input
             className="search-inp"
             onChange={searchFood}
@@ -101,8 +103,8 @@ const Track = () => {
         {food !== null ? (
           <Food food={food} updateCaloriesConsumed={updateCaloriesConsumed} />
         ) : null}
-      </section>
       {isTracking && <Vizual caloriesConsumed={caloriesConsumed} />}
+      </div>
     </>
   );
 };

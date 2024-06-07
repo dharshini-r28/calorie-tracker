@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
-
+import '../cssfile/visual.css';
 const Vizual = ({ caloriesConsumed }) => {
   const { loggedUser } = useContext(UserContext);
   const [totalCalories, setTotalCalories] = useState(0);
@@ -87,7 +87,7 @@ const Vizual = ({ caloriesConsumed }) => {
   }, [totalCalories, caloriesConsumed, caloriesToGo, loggedUser]);
 
   return (
-    <div>
+    <div className='toright'>
       <h2>Total Calorie Intake: {totalCalories}</h2>
       <h2>Calories Consumed: {caloriesConsumed}</h2>
       <h2>Calories To Go: {caloriesToGo}</h2>
