@@ -1,0 +1,14 @@
+.search{
+    max-width: 1000px;
+    margin-left: 550px;
+}
+
+.search .search-icon{
+    margin-left: 950px;
+    position: relative;
+    top:40px;
+}
+
+.search .search-inp{
+    padding: 20px;
+}
