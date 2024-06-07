@@ -1,6 +1,7 @@
 import { useState,useContext, useEffect } from "react"
 import { UserContext } from "../contexts/UserContext";
 import { Link,useNavigate } from "react-router-dom"
+import '../cssfile/login.css';
 const Login=()=>
 {
 
@@ -86,6 +87,9 @@ const Login=()=>
 
     return (
         <section className="container">
+
+            <img src='img10.avif'></img>
+
 
             <form className="form" onSubmit={handleSubmit}>
 

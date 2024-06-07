@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+
+/* Container styling */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Image styling */
+.auth-container img {
+    height: 115.5%;
+    width: 31.7%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Form styling */
+.auth-form {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+/* Heading styling */
+.auth-form h1 {
+    margin-bottom: 1.5rem;
+    color: #800080;
+    margin-left: 10%;
+    font-size: 34px;
+}
+
+/* Input field styling */
+.auth-input {
+    padding: 10px;
+    margin-bottom: 0.9rem;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-left: 10px;
+    margin-top: 20px;
+    width: calc(100% - 22px);
+}
+
+/* Button styling */
+.auth-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #800080;
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.auth-button:hover {
+    background-color: #AA336A;
+    box-shadow: 2px 2px 0px 0px antiquewhite;
+}
+
+/* Paragraph and link styling */
+.auth-form p {
+    margin-top: 1rem;
+    color: black;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.auth-form p a {
+    color: #BF40BF;
+    text-decoration: none;
+    font-weight: 1000;
+    font-size: 20px;;
+}
+
+.auth-form p a:hover {
+    text-decoration: underline;
+}
+
+/* Message styling */
+.message {
+    margin-top: 1rem;
+    font-size: 14px;
+    margin-right: 40px;
+}
+
+.message.success {
+    color: #28a745;
+}
+
+.message.error {
+    color: #dc3545;
+}

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { UserContext } from "../contexts/UserContext"
 import { useContext } from "react"
 import Header from './Header'
-
+import '../cssfile/diet.css'
 const Plan = () => {
 
     let loggedData = useContext(UserContext)
@@ -58,8 +58,9 @@ const Plan = () => {
     }
 
     return (
-        <section className="container diet-container">
-            <Header />
+        <>
+        <Header />
+        <section className="container-diet-container">
             <input type="date" onChange={(event) => {
                 setDate(new Date(event.target.value));
             }} />
@@ -78,6 +79,7 @@ const Plan = () => {
                 <p>Protein {total.totalProtein}g, Carbs {total.totalCarbs}g, Fats {total.totalFats}g, Fiber {total.totalFiber}g</p>
             </div>
         </section>
+        </>
     )
 }
 
