@@ -1,7 +1,7 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './component/Login'
-import Notfound from './component/Notfound'
+// import Notfound from './component/Notfound'
 import Track from './component/Track'
 import Private from './component/Private'
 import Register from './component/Register'
@@ -41,7 +41,7 @@ const App=()=> {
                   <Route path='/track' element={<Track/>}/>
                   <Route path='/plan' element={<Plan/>}/>
                   <Route path="/cal" element={<CalorieCalculator/>}/>
-                  <Route path='*' element={<Notfound/>}/>
+                  {/* <Route path='*' element={<Notfound/>}/> */}
                   <Route path='/chatbot' element={<Chatbot/>}/>
                   {/* <Route path='/viz' element={<Vizual/>}/> */}
               </Routes>

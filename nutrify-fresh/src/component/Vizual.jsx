@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
-import '../cssfile/visual.css';
+import '../cssfile/visual.css'
 const Vizual = ({ caloriesConsumed }) => {
   const { loggedUser } = useContext(UserContext);
   const [totalCalories, setTotalCalories] = useState(0);
-  const [caloriesToGo, setCaloriesToGo] = useState(0);
   const [progress, setProgress] = useState(0);
 
-  // Fetch total calorie intake for the logged-in user
+ 
   useEffect(() => {
     const fetchCalorieData = async () => {
       try {
@@ -25,7 +24,6 @@ const Vizual = ({ caloriesConsumed }) => {
           setTotalCalories(data.calorieEntry.calories);
         } else {
           setTotalCalories(data.calorieEntry.calories);
-          setCaloriesToGo(data.calorieEntry.calories);
         }
       } catch (error) {
         console.error('Error fetching total calories:', error);
@@ -36,21 +34,17 @@ const Vizual = ({ caloriesConsumed }) => {
   }, [loggedUser]);
 
   useEffect(() => {
-    if (caloriesConsumed > totalCalories) {
-      setCaloriesToGo(0);
-    } else {
-      setCaloriesToGo(totalCalories - caloriesConsumed);
-    }
-
-    // Calculate progress
     let percentage = (caloriesConsumed / totalCalories) * 100;
-    percentage = Math.min(percentage, 100); // Clamp to a maximum of 100
+    percentage = Math.min(percentage, 100); 
     setProgress(percentage);
   }, [totalCalories, caloriesConsumed]);
 
   useEffect(() => {
     const postCalorieInfo = async () => {
-      const currentDate = new Date().toISOString().split('T')[0]; // Format date as YYYY-MM-DD
+      const currentDate = new Date().toISOString().split('T')[0]; 
+
+      
+      const caloriesToGo = Math.max(totalCalories - caloriesConsumed, 0);
 
       const data = {
         userId: loggedUser.userid,
@@ -81,16 +75,24 @@ const Vizual = ({ caloriesConsumed }) => {
       }
     };
 
-    if (totalCalories !== 0 || caloriesConsumed !== 0 || caloriesToGo !== 0) {
+    if (totalCalories !== 0 || caloriesConsumed !== 0) {
       postCalorieInfo();
     }
-  }, [totalCalories, caloriesConsumed, caloriesToGo, loggedUser]);
+  }, [totalCalories, caloriesConsumed, loggedUser]);
 
   return (
-    <div className='toright'>
-      <h2>Total Calorie Intake: {totalCalories}</h2>
-      <h2>Calories Consumed: {caloriesConsumed}</h2>
-      <h2>Calories To Go: {caloriesToGo}</h2>
+    <div className="vizual-container">
+      <div className="vizual-text">
+        <div className="vizual-box">
+          <h2>Total Calorie Intake: {totalCalories}</h2>
+        </div>
+        <div className="vizual-box">
+          <h2>Calories Consumed: {caloriesConsumed}</h2>
+        </div>
+        <div className="vizual-box">
+          <h2>Calories To Go: {Math.max(totalCalories - caloriesConsumed, 0)}</h2>
+        </div>
+      </div>
       <svg width="300" height="300">
         <defs>
           <linearGradient id="GradientColor">

@@ -55,7 +55,7 @@ const Food = (props) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        // Update consumed calories when food is tracked
+        
         props.updateCaloriesConsumed(food.calories);
       })
       .catch((err) => {
