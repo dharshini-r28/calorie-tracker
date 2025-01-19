@@ -9,7 +9,7 @@ import { UserContext } from './contexts/UserContext'
 import { useEffect, useState } from 'react'
 import Plan from './component/Plan'
 import CalorieCalculator from './component/CalorieCalculators'
-import Chatbot from './component/Chatbot'
+// import Chatbot from './component/Chatbot'
 import Vizual from './component/Vizual'
 
 
@@ -42,7 +42,7 @@ const App=()=> {
                   <Route path='/plan' element={<Plan/>}/>
                   <Route path="/cal" element={<CalorieCalculator/>}/>
                   {/* <Route path='*' element={<Notfound/>}/> */}
-                  <Route path='/chatbot' element={<Chatbot/>}/>
+                  {/* <Route path='/chatbot' element={<Chatbot/>}/> */}
                   {/* <Route path='/viz' element={<Vizual/>}/> */}
               </Routes>
         

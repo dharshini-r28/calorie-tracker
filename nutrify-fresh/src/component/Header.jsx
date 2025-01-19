@@ -23,7 +23,7 @@ export default function Header()
                     <Link to="/track"><li>Track</li></Link>
                     <Link to="/plan"><li>Diet</li></Link>
                     <Link to="/cal"><li>Form</li></Link>
-                    <Link to="/chatbot"><li>suggestion</li></Link>
+                    {/* <Link to="/chatbot"><li>suggestion</li></Link> */}
                     <li onClick={logout}>Logout</li>
                 </ul>
 
